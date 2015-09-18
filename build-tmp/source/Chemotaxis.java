@@ -14,19 +14,32 @@ import java.io.IOException;
 
 public class Chemotaxis extends PApplet {
 
- //declare bacteria variables here   
+Bacteria [] friends; 
+//int x =  200; 
+//int y =  200;
  public void setup()   
  {    
  	size(400,400);   
- 	
+ 	friends = new Bacteria [100];
+ 	for (int i = 0; i < friends.length; i++ )
+ 	{
+ 		friends[i] = new Bacteria(200,200);
+ 	}
  }   
  public void draw()   
  {
- 	frameRate(10);
- 	background(0);
- 	int x =  (int)(Math.random()*21)-10;
- 	Bacteria one = new Bacteria (200 + x,200);
- 	one.show();
+ 	frameRate(5);
+ 	background(255);
+ 	//int x =  200; //(int)(Math.random()*21)-10;
+ 	//int y =  200; //(int)(Math.random()*21)-10;
+ 	//System.out.println(dir);
+ 	//Bacteria one = new Bacteria (x,y);
+ 	//one.show();
+ 	for (int i = 0; i < friends.length; i++ )
+ 	{
+ 		friends[i].move();
+ 		friends[i].show();
+ 	}
  }  
  class Bacteria    
  { 
@@ -41,12 +54,28 @@ public class Chemotaxis extends PApplet {
  	}  
  	public void move()
  	{
-
+ 		int dir = (int)(Math.random()*4);
+ 		if (dir == 0)
+ 		{
+ 			myX = myX + 10;
+ 		}
+ 		else if (dir == 1)
+ 		{
+ 			myX = myX - 10;
+ 		} 
+ 		else if (dir == 2)
+ 		{
+ 			myY = myY + 10;
+ 		}
+ 		else 
+ 		{
+ 			myY = myY - 10;
+ 		}
  	} 
  	public void show()
  	{
  		noStroke();
- 		fill(col1,col2,col3,127);
+ 		fill(col1,col2,col3,80);
  		//System.out.println(col);
  		ellipse(myX, myY, 10, 10);
  		
