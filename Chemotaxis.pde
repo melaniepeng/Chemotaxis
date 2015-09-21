@@ -38,28 +38,29 @@ Bacteria [] friends;
  	}  
  	void move()
  	{
+ 		int steps = (int)(Math.random()*11)-5;
  		int dir = (int)(Math.random()*4);
  		if (dir == 0)
  		{
- 			myX = myX + 10;
+ 			myX = myX + steps;
  		}
  		else if (dir == 1)
  		{
- 			myX = myX - 10;
+ 			myX = myX - steps;
  		} 
  		else if (dir == 2)
  		{
- 			myY = myY + 10;
+ 			myY = myY + steps;
  		}
  		else 
  		{
- 			myY = myY - 10;
+ 			myY = myY - steps;
  		}
  	} 
  	void show()
  	{
  		noStroke();
- 		fill(col1,col2,col3,80);
+ 		fill(col1,col2,col3,90);
  		//System.out.println(col);
  		ellipse(myX, myY, 10, 10);
  		
