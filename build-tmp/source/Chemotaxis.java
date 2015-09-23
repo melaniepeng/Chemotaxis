@@ -15,12 +15,13 @@ import java.io.IOException;
 public class Chemotaxis extends PApplet {
 
 Bacteria [] friends; 
-//int x =  200; 
-//int y =  200;
+int x = 200;
+int y = 200;
+int z = 100;
  public void setup()   
  {    
  	size(400,400);   
- 	friends = new Bacteria [100];
+ 	friends = new Bacteria [z];
  	for (int i = 0; i < friends.length; i++ )
  	{
  		friends[i] = new Bacteria(200,200);
@@ -28,18 +29,37 @@ Bacteria [] friends;
  }   
  public void draw()   
  {
- 	frameRate(5);
  	background(255);
- 	//int x =  200; //(int)(Math.random()*21)-10;
- 	//int y =  200; //(int)(Math.random()*21)-10;
- 	//System.out.println(dir);
- 	//Bacteria one = new Bacteria (x,y);
- 	//one.show();
+ 	fill(0,0,225);
+ 	ellipse(mouseX,mouseY,15,15);
  	for (int i = 0; i < friends.length; i++ )
  	{
  		friends[i].move();
  		friends[i].show();
  	}
+ 	if (get(x,y) == color (0,0,225))
+ 	{
+ 		z = z + 100;
+ 		Bacteria [] more;
+
+ 		/*for (int i = 0; i < friends.length; i++ )
+ 		{
+ 			friends[i] = new Bacteria(200,200);
+ 			friends[i].move();
+ 			friends[i].show();
+ 		}*/
+ 	}
+ 	/*if (x > 400 || y > 400)
+ 	{
+ 		friends = new Bacteria [10];
+ 		for (int i = 0; i < friends.length; i++ )
+ 		{
+ 			friends[i] = new Bacteria(200,200);
+ 			friends[i].move();
+ 			friends[i].show();
+ 		}
+
+ 	}*/
  }  
  class Bacteria    
  { 
@@ -52,6 +72,7 @@ Bacteria [] friends;
  		col2 = (int)(Math.random()*255);
  		col3 = (int)(Math.random()*255);
  	}  
+ 	//int out = false;
  	public void move()
  	{
  		int steps = (int)(Math.random()*11)-5;
@@ -72,6 +93,14 @@ Bacteria [] friends;
  		{
  			myY = myY - steps;
  		}
+ 		/*if (myX > 400 || myY > 400)
+ 		{
+ 			out = true;
+ 		}
+ 		else
+ 		{
+ 			out = false;
+ 		}*/
  	} 
  	public void show()
  	{
