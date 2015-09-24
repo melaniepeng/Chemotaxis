@@ -15,13 +15,15 @@ import java.io.IOException;
 public class Chemotaxis extends PApplet {
 
 Bacteria [] friends; 
+Bacteria [] more;
 int x = 200;
 int y = 200;
-int z = 100;
+int i = 0;
+//int z = 100;
  public void setup()   
  {    
  	size(400,400);   
- 	friends = new Bacteria [z];
+ 	friends = new Bacteria [100];
  	for (int i = 0; i < friends.length; i++ )
  	{
  		friends[i] = new Bacteria(200,200);
@@ -37,30 +39,27 @@ int z = 100;
  		friends[i].move();
  		friends[i].show();
  	}
- 	if (get(x,y) == color (0,0,225))
+ 	if (get(friends[i].myX,friends[i].myY) == color (0,0,225))
  	{
- 		z = z + 100;
- 		Bacteria [] more;
-
- 		/*for (int i = 0; i < friends.length; i++ )
+ 		more = new Bacteria [10];
+		for (int s = 0; s < more.length; s++ )
  		{
- 			friends[i] = new Bacteria(200,200);
- 			friends[i].move();
- 			friends[i].show();
- 		}*/
+ 			more[s] = new Bacteria(200,200);
+			more[s].move();
+ 			more[s].show();
+ 		}
  	}
- 	/*if (x > 400 || y > 400)
+ 	/*if (mousePressed)
  	{
- 		friends = new Bacteria [10];
+ 		ellipse(mouseX,mouseY,15,15);
  		for (int i = 0; i < friends.length; i++ )
  		{
- 			friends[i] = new Bacteria(200,200);
- 			friends[i].move();
- 			friends[i].show();
+ 			friends[i].myX = mouseX;
+ 			friends[i].myY = mouseY;
  		}
-
  	}*/
  }  
+
  class Bacteria    
  { 
  	int myX, myY,col1,col2,col3;    
@@ -106,7 +105,6 @@ int z = 100;
  	{
  		noStroke();
  		fill(col1,col2,col3,90);
- 		//System.out.println(col);
  		ellipse(myX, myY, 10, 10);
  		
  	}
