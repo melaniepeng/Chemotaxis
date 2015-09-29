@@ -18,15 +18,13 @@ Bacteria [] friends;
 Bacteria [] more;
 int x = 200;
 int y = 200;
-int i = 0;
-//int z = 100;
  public void setup()   
  {    
  	size(400,400);   
- 	friends = new Bacteria [100];
+ 	friends = new Bacteria [10];
  	for (int i = 0; i < friends.length; i++ )
  	{
- 		friends[i] = new Bacteria(200,200);
+ 		friends[i] = new Bacteria();
  	}
  }   
  public void draw()   
@@ -36,34 +34,26 @@ int i = 0;
  	ellipse(mouseX,mouseY,15,15);
  	for (int i = 0; i < friends.length; i++ )
  	{
- 		friends[i].move();
  		friends[i].show();
+ 		friends[i].move();
+ 		
  	}
- 	if (get(friends[i].myX,friends[i].myY) == color (0,0,225))
+ 	if (get(friends[friends.length].myX,friends[friends.length].myY) == color (0,0,255))
  	{
- 		more = new Bacteria [10];
-		for (int s = 0; s < more.length; s++ )
+ 		more = new Bacteria [100];
+ 		for (int j = 0; j < more.length; j++ )
  		{
- 			more[s] = new Bacteria(200,200);
-			more[s].move();
- 			more[s].show();
+ 			more[j] = new Bacteria();
  		}
  	}
- 	/*if (mousePressed)
- 	{
- 		ellipse(mouseX,mouseY,15,15);
- 		for (int i = 0; i < friends.length; i++ )
- 		{
- 			friends[i].myX = mouseX;
- 			friends[i].myY = mouseY;
- 		}
- 	}*/
+ 	
+
  }  
 
  class Bacteria    
  { 
  	int myX, myY,col1,col2,col3;    
- 	Bacteria(int x, int y)
+ 	Bacteria()
  	{
  		myX = x;
  		myY = y;
@@ -74,8 +64,9 @@ int i = 0;
  	//int out = false;
  	public void move()
  	{
- 		int steps = (int)(Math.random()*11)-5;
+ 		int steps = (int)(Math.random()*3)-1;
  		int dir = (int)(Math.random()*4);
+ 		int bias = (int)(Math.random()*3)-2;
  		if (dir == 0)
  		{
  			myX = myX + steps;
@@ -92,17 +83,29 @@ int i = 0;
  		{
  			myY = myY - steps;
  		}
- 		/*if (myX > 400 || myY > 400)
+
+ 		if (mouseX > myX)
  		{
- 			out = true;
+ 			myX = myX - bias;
  		}
  		else
  		{
- 			out = false;
- 		}*/
+ 			myX = myX + bias;
+ 		}
+
+ 		if (mouseY > myY)
+ 		{
+ 			myY = myY - bias;
+ 		}
+ 		else
+ 		{
+ 			myY = myY + bias;
+ 		}
  	} 
  	public void show()
  	{
+ 		//myX = (int)(Math.random()*400);
+ 		//myY = (int)(Math.random()*400);
  		noStroke();
  		fill(col1,col2,col3,90);
  		ellipse(myX, myY, 10, 10);
