@@ -2,36 +2,55 @@ Bacteria [] friends;
 Bacteria [] more;
 int x = 200;
 int y = 200;
+boolean alive = true;
  void setup()   
  {    
  	size(400,400);   
- 	friends = new Bacteria [10];
+ 	friends = new Bacteria [100];
  	for (int i = 0; i < friends.length; i++ )
  	{
  		friends[i] = new Bacteria();
  	}
+ 	more = new Bacteria [10];
+ 			for (int j = 0; j < more.length; j++ )
+ 			{
+ 				more[j] = new Bacteria();
+ 			}
+
  }   
  void draw()   
  {
  	background(255);
  	fill(0,0,225);
  	ellipse(mouseX,mouseY,15,15);
+ 	more = new Bacteria [10];
  	for (int i = 0; i < friends.length; i++ )
  	{
  		friends[i].show();
  		friends[i].move();
- 		
+ 		friends[i].eat();
+ 		if (get(friends[i].myX,friends[i].myY) == color (0,0,255))
+ 		{
+ 			
+ 			for (int j = 0; j < more.length; j++ )
+ 			{
+ 				more[j] = new Bacteria();
+ 				more[j].show();
+ 				more[j].move();
+ 			}
+ 			alive = false;
+
+ 		}
+
  	}
- 	if (get(friends[friends.length].myX,friends[friends.length].myY) == color (0,0,255))
+ 	if(alive == false)
  	{
- 		more = new Bacteria [100];
  		for (int j = 0; j < more.length; j++ )
  		{
- 			more[j] = new Bacteria();
+ 		 	more[j].eat();
  		}
  	}
  	
-
  }  
 
  class Bacteria    
@@ -50,7 +69,7 @@ int y = 200;
  	{
  		int steps = (int)(Math.random()*3)-1;
  		int dir = (int)(Math.random()*4);
- 		int bias = (int)(Math.random()*3)-2;
+ 		
  		if (dir == 0)
  		{
  			myX = myX + steps;
@@ -68,6 +87,11 @@ int y = 200;
  			myY = myY - steps;
  		}
 
+ 		
+ 	} 
+ 	void eat ()
+ 	{
+ 		int bias = (int)(Math.random()*3)-2;
  		if (mouseX > myX)
  		{
  			myX = myX - bias;
@@ -85,7 +109,7 @@ int y = 200;
  		{
  			myY = myY + bias;
  		}
- 	} 
+ 	}
  	void show()
  	{
  		//myX = (int)(Math.random()*400);
