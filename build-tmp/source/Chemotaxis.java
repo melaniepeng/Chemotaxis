@@ -45,18 +45,7 @@ boolean alive = true;
  		friends[i].show();
  		friends[i].move();
  		friends[i].eat();
- 		if (get(friends[i].myX,friends[i].myY) == color (0,0,255))
- 		{
- 			
- 			for (int j = 0; j < more.length; j++ )
- 			{
- 				more[j] = new Bacteria();
- 				more[j].show();
- 				more[j].move();
- 			}
- 			alive = false;
-
- 		}
+ 		
 
  	}
  	if(alive == false)
@@ -72,6 +61,7 @@ boolean alive = true;
  class Bacteria    
  { 
  	int myX, myY,col1,col2,col3;    
+ 	boolean alive = true;
  	Bacteria()
  	{
  		myX = x;
@@ -125,14 +115,19 @@ boolean alive = true;
  		{
  			myY = myY + bias;
  		}
+ 		if (get(myX,myY) == color (0,0,255))
+ 		{
+ 			alive = false;
+ 		}
  	}
  	public void show()
  	{
- 		//myX = (int)(Math.random()*400);
- 		//myY = (int)(Math.random()*400);
- 		noStroke();
- 		fill(col1,col2,col3,90);
- 		ellipse(myX, myY, 10, 10);
+ 		if (alive == true)
+ 		{
+ 			noStroke();
+ 			fill(col1,col2,col3,90);
+ 			ellipse(myX, myY, 10, 10);
+ 		}
  		
  	}
  }    
